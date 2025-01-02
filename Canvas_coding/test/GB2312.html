@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>????????? - ?????</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #game-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            font-weight: bold;
+        }
+        #history {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>????????? - ?????</h1>
+        <p>?????????1??200??????????</p>
+        <input type="number" id="guessInput" min="1" max="200">
+        <button onclick="checkGuess()">?????</button>
+        <p id="result"></p>
+        <div id="history">
+            <h3>??????</h3>
+            <ul id="historyList"></ul>
+        </div>
+    </div>
+    <script>
+        let targetNumber;
+        let guessCount = 0;
+        const maxGuesses = 10;
+        const historyList = document.getElementById('historyList');
+
+        function startGame() {
+            targetNumber = Math.floor(Math.random() * 200) + 1;
+            guessCount = 0;
+            historyList.innerHTML = '';
+            document.getElementById('result').textContent = '';
+        }
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            guessCount++;
+            const resultElement = document.getElementById('result');
+            if (isNaN(guess)) {
+                resultElement.textContent = "????????????????????";
+                return;
+            }
+            if (guessCount > maxGuesses) {
+                resultElement.textContent = `?????????????????? ${maxGuesses} ????????????? ${targetNumber}??`;
+                return;
+            }
+            const listItem = document.createElement('li');
+            listItem.textContent = `?? ${guessCount} ?????: ${guess}`;
+            historyList.appendChild(listItem);
+            if (guess < targetNumber) {
+                resultElement.textContent = "??????????????????";
+            } else if (guess > targetNumber) {
+                resultElement.textContent = "?????????????????";
+            } else {
+                resultElement.textContent = `????????? ${guessCount} ?????????????`;
+            }
+        }
+
+        startGame();
+    </script>
+</body>
+</html
