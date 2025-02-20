@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>��������Ϸ - ���Ӱ�</title>
+    <title>猜数字游戏 - 复杂版</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,13 +51,13 @@
 </head>
 <body>
     <div id="game-container">
-        <h1>��������Ϸ - ���Ӱ�</h1>
-        <p>������һ��1��200֮���������</p>
+        <h1>猜数字游戏 - 复杂版</h1>
+        <p>请输入一个1到200之间的整数：</p>
         <input type="number" id="guessInput" min="1" max="200">
-        <button onclick="checkGuess()">�ύ�²�</button>
+        <button onclick="checkGuess()">提交猜测</button>
         <p id="result"></p>
         <div id="history">
-            <h3>�²���ʷ</h3>
+            <h3>猜测历史</h3>
             <ul id="historyList"></ul>
         </div>
     </div>
@@ -79,22 +79,22 @@
             guessCount++;
             const resultElement = document.getElementById('result');
             if (isNaN(guess)) {
-                resultElement.textContent = "������һ����Ч�����֣�";
+                resultElement.textContent = "请输入一个有效的数字！";
                 return;
             }
             if (guessCount > maxGuesses) {
-                resultElement.textContent = `���ź������Ѿ������� ${maxGuesses} �λ��ᡣ��ȷ���� ${targetNumber}��`;
+                resultElement.textContent = `很遗憾，你已经用完了 ${maxGuesses} 次机会。正确答案是 ${targetNumber}。`;
                 return;
             }
             const listItem = document.createElement('li');
-            listItem.textContent = `�� ${guessCount} �β²�: ${guess}`;
+            listItem.textContent = `第 ${guessCount} 次猜测: ${guess}`;
             historyList.appendChild(listItem);
             if (guess < targetNumber) {
-                resultElement.textContent = "��С�ˣ�������һ�Ρ�";
+                resultElement.textContent = "猜小了，请再试一次。";
             } else if (guess > targetNumber) {
-                resultElement.textContent = "�´��ˣ�������һ�Ρ�";
+                resultElement.textContent = "猜大了，请再试一次。";
             } else {
-                resultElement.textContent = `��ϲ������ ${guessCount} �β²��в¶��ˣ�`;
+                resultElement.textContent = `恭喜，你在 ${guessCount} 次猜测中猜对了！`;
             }
         }
 
